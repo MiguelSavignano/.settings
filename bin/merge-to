@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# $1 branch name
+
+BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
+read -p "Are you sure you want to deploy $BRANCH_NAME? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    git stash &&
+    git checkout beta &&
+    git fetch &&
+    git reset --hard origin/beta &&
+    git merge --no-edit $BRANCH_NAME &&
+    git push origin beta
+    git checkout $BRANCH_NAME
+fi
+
+folder_name=$(echo "${PWD##*/}")
+# echo "https://circleci.com/gh/coverwallet/workflows/${folder_name}/tree/beta"
