@@ -1,0 +1,2 @@
+#! /bin/bash
+git branch --merged | egrep -v "(^\*|master|development|beta|staging)" | xargs git branch -d
