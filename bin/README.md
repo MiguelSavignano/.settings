@@ -1,13 +1,10 @@
-# Install docker
+# Install 
 
-# Instal python
+- docker
+- python
+- vim
+- rvm
+- nvm
+- [Fuzzy finder](https://github.com/junegunn/fzf)
 
-# Install vim
 
-# Install rvm
-
-# Install nvm
-
-# Install Fuzzy finder
-
-https://github.com/junegunn/fzf
