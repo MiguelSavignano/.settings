@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+## execute a /bin/bash terminal in a k8s pod
+
+# $1 zone name
+# $2 app name
+# $3 namespace
+
+if [[ $1 == "eu" ]];
+then
+  echo "EU"
+  gcloud container clusters get-credentials $EU_CLUSTER_NAME --zone EU_ZONE --project EU_PROJECT_ID
+elif [[ $1 == "latam" ]];
+then
+  echo "LATAM"
+  cloud container clusters get-credentials $LATAM_CLUSTER_NAME --zone LATAM_ZONE --project LATAM_PROJECT_ID
+elif [[ $1 == "us" ]];
+then
+  echo "US"
+  gcloud container clusters get-credentials $US_CLUSTER_NAME --zone US_ZONE --project US_PROJECT_ID
+else
+ exit 1 
+fi
+
+## Namespace
+NAMESPACE=$3
+then
+  kubectl --namespace $3 exec -it $(kubectl --namespace $3 get pods -l app=$2 -o jsonpath='{.items[0].metadata.name}') /bin/sh
+else
+  kubectl --namespace $3 exec -it $(kubectl --namespace $3 get pods -l app=$2 -o jsonpath='{.items[0].metadata.name}') /bin/sh
+fi
