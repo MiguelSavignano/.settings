@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Get only modify files in git.
+# git diff-tree -r --diff-filter=ad --name-status HEAD origin/develop
+
+# Execute rubocop only for changed files
+git diff-tree -r --diff-filter=ad --name-only HEAD origin/develop | grep '.rb' | xargs bundle exec rubocop
+
+# Execute rspec only for changed files
+git diff-tree -r --diff-filter=ad --name-only HEAD origin/develop | grep '_spec.rb' | xargs bundle exec rspec
